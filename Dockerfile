@@ -1,10 +1,17 @@
-FROM openjdk:14-jdk
+FROM openjdk:11-jdk-stretch
 
 USER root
 
 ENV REMCO_VER 0.11.1
 ENV MARID_VER 2.15.0
 ENV JRUBY_VER 9.2.7.0
+ENV TINI_VERSION v0.18.0
+
+RUN set -eux pipefail && \
+  # Update and install packages
+  apt-get -y update && apt-get -y install \
+    curl \
+    wget
 
 # Install Remco
 RUN wget https://github.com/HeavyHorst/remco/releases/download/v${REMCO_VER}/remco_${REMCO_VER}_linux_amd64.zip && \
