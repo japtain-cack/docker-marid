@@ -11,7 +11,8 @@ RUN set -eux pipefail && \
   # Update and install packages
   apt-get -y update && apt-get -y install \
     curl \
-    wget
+    wget \
+    vim
 
 # Install Remco
 RUN wget https://github.com/HeavyHorst/remco/releases/download/v${REMCO_VER}/remco_${REMCO_VER}_linux_amd64.zip && \
@@ -41,11 +42,15 @@ COPY --chown=marid:root remco /etc/remco
 USER marid
 WORKDIR /home/marid
 
-# Copy over scripts
-COPY ./files/entrypoint.sh ./
+# Copy over startup scripts
+COPY --chown=marid:marid ./files/entrypoint.sh ./
 RUN chmod ug+x ./entrypoint.sh
 
-EXPOSE 80
+# marid ports
+#EXPOSE 8080
+
+# java jdwp port
 EXPOSE 17777
+
 ENTRYPOINT ["/tini", "--", "./entrypoint.sh"]
 
