@@ -36,14 +36,16 @@ RUN wget -O /tini https://github.com/krallin/tini/releases/download/${TINI_VERSI
   chmod +x /tini
 
 # Install Remco configs
-COPY remco /etc/remco
+COPY --chown=marid:root remco /etc/remco
 
 USER marid
 WORKDIR /home/marid
 
 # Copy over scripts
 COPY ./files/entrypoint.sh ./
+RUN chmod ug+x ./entrypoint.sh
 
 EXPOSE 80
+EXPOSE 17777
 ENTRYPOINT ["/tini", "--", "./entrypoint.sh"]
 
