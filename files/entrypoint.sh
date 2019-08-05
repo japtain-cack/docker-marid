@@ -12,6 +12,10 @@ export LOGS_DIR=${LOGS_DIR:-'/var/opsgenie/marid/log'}
 export MEM_LIMIT=${MEM_LIMIT:-'512'}
 export DJAVAX_NET_DEBUG=${DJAVAX_NET_DEBUG:-''}
 
+if [[ "${HTTP_SERVER_HOST}" == "eth0" ]]; then
+  export HTTP_SERVER_HOST=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+fi
+
 remco
 
 cat <<EOF > ${SCRIPTS_DIR}/test.groovy
