@@ -17,33 +17,33 @@ RUN set -eux pipefail && \
 # Install Remco
 RUN wget https://github.com/HeavyHorst/remco/releases/download/v${REMCO_VER}/remco_${REMCO_VER}_linux_amd64.zip && \
 	unzip remco_${REMCO_VER}_linux_amd64.zip && rm remco_${REMCO_VER}_linux_amd64.zip && \
-	mv remco_linux /bin/remco
+	mv remco_linux /bin/remco && \
+  chmod +rx /bin/remco
 
 # Install Marid and JRuby
 RUN curl -O https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-marid_${MARID_VER}_all.deb && \
   dpkg -i opsgenie-marid_${MARID_VER}_all.deb && \
   curl -o /var/lib/opsgenie/marid/jruby-complete-${JRUBY_VER}.jar https://s3.amazonaws.com/jruby.org/downloads/${JRUBY_VER}/jruby-complete-${JRUBY_VER}.jar
 
-# Setup marid user
-RUN adduser --shell /bin/bash --home /home/marid --gecos "" --disabled-password marid && \
-  passwd -d marid && \
-  addgroup marid sudo
+# Setup opsgenie user
+RUN passwd -d opsgenie && \
+  addgroup opsgenie sudo
 
 # Add Tini (A tiny but valid init for containers) https://github.com/krallin/tini
 RUN wget -O /tini https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini && \
   wget -O /tini.asc https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc && \
   gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 && \
   gpg --batch --verify /tini.asc /tini && \
-  chmod +x /tini
+  chmod +rx /tini
 
 # Install Remco configs
-COPY --chown=marid:root remco /etc/remco
+COPY --chown=opsgenie:root remco /etc/remco
 
-USER marid
-WORKDIR /home/marid
+USER opsgenie
+WORKDIR /home/opsgenie
 
 # Copy over startup scripts
-COPY --chown=marid:marid ./files/entrypoint.sh ./
+COPY --chown=opsgenie:opsgenie ./files/entrypoint.sh ./
 RUN chmod ug+x ./entrypoint.sh
 
 # marid ports
@@ -51,6 +51,7 @@ RUN chmod ug+x ./entrypoint.sh
 
 # java jdwp port
 EXPOSE 17777
+VOLUME ["/var/opsgenie/marid/scripts"]
 
 ENTRYPOINT ["/tini", "--", "./entrypoint.sh"]
 

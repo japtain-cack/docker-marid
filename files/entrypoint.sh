@@ -1,16 +1,16 @@
 #!/bin/bash
 
-export MARID_HOME=/home/marid
+export MARID_HOME=/home/opsgenie
 export REMCO_HOME=/etc/remco
 export REMCO_RESOURCE_DIR=${REMCO_HOME}/resources.d
 export REMCO_TEMPLATE_DIR=${REMCO_HOME}/templates
 
-CONF_PATH=${CONF_PATH:-'/etc/opsgenie/marid/marid.conf'}
-LOG_CONF_PATH=${LOG_CONF_PATH:-'/etc/opsgenie/marid/log.properties'}
-SCRIPTS_DIR=${SCRIPTS_DIR:-'/var/opsgenie/marid/scripts'}
-LOGS_DIR=${LOGS_DIR:-'/var/opsgenie/marid/log'}
-MEM_LIMIT=${MEM_LIMIT:-'512'}
-DJAVAX_NET_DEBUG=${DJAVAX_NET_DEBUG:-''}
+export CONF_PATH=${CONF_PATH:-'/etc/opsgenie/marid/marid.conf'}
+export LOG_CONF_PATH=${LOG_CONF_PATH:-'/etc/opsgenie/marid/log.properties'}
+export SCRIPTS_DIR=${SCRIPTS_DIR:-'/var/opsgenie/marid/scripts'}
+export LOGS_DIR=${LOGS_DIR:-'/var/opsgenie/marid/log'}
+export MEM_LIMIT=${MEM_LIMIT:-'512'}
+export DJAVAX_NET_DEBUG=${DJAVAX_NET_DEBUG:-''}
 
 remco
 
