@@ -14,6 +14,14 @@ export DJAVAX_NET_DEBUG=${DJAVAX_NET_DEBUG:-''}
 
 remco
 
+cat <<EOF > ${SCRIPTS_DIR}/test.groovy
+import java.text.SimpleDateFormat
+def date = new Date()
+sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+println sdf.format(date)
+return sdf.format(date)
+EOF
+
 java \
   -Dmarid.config=/etc/opsgenie/marid \
   -Dmarid.conf.path="$CONF_PATH" \
