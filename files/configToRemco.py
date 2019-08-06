@@ -28,7 +28,7 @@ try:
             if re.search('^#.*', line):
                 comment = '#'
 
-            data += (comment + match.group(1) + "={{ getenv(\"" + match.group(1).replace('.', '_').upper() + "\", \"" + match.group(2) + "\") }}" + "\n")
+            data += (comment + match.group(1).strip() + "={{ getenv(\"" + match.group(1).replace('.', '_').upper().strip() + "\", \"" + match.group(2).strip() + "\") }}" + "\n")
         elif re.search('^#.*', line):
             data += line
         else:
