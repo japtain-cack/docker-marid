@@ -46,8 +46,8 @@ WORKDIR /home/opsgenie
 COPY --chown=opsgenie:opsgenie ./files/entrypoint.sh ./
 RUN chmod ug+x ./entrypoint.sh
 
-# marid ports
-#EXPOSE 8080
+# marid http port
+EXPOSE 8080
 
 # java jdwp port
 EXPOSE 17777
