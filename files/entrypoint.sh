@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MARID_HOME=/home/opsgenie
+export MARID_HOME=/var/opsgenie
 export REMCO_HOME=/etc/remco
 export REMCO_RESOURCE_DIR=${REMCO_HOME}/resources.d
 export REMCO_TEMPLATE_DIR=${REMCO_HOME}/templates

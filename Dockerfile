@@ -3,7 +3,8 @@ FROM openjdk:11-jdk-stretch
 USER root
 
 ENV REMCO_VER 0.11.1
-ENV MARID_VER 2.15.0
+ENV OGINT_VER 2019.18.07
+ENV MARID_VER 1.0.0
 ENV JRUBY_VER 9.2.7.0
 ENV TINI_VERSION v0.18.0
 
@@ -21,8 +22,9 @@ RUN wget https://github.com/HeavyHorst/remco/releases/download/v${REMCO_VER}/rem
   chmod +rx /bin/remco
 
 # Install Marid and JRuby
-RUN curl -O https://s3-us-west-2.amazonaws.com/opsgeniedownloads/repo/opsgenie-marid_${MARID_VER}_all.deb && \
-  dpkg -i opsgenie-marid_${MARID_VER}_all.deb && \
+RUN curl -o OpsGenieClient-v2-${OGINT_VER}.zip https://codeload.github.com/opsgenie/opsgenie-integration/zip/OpsGenieClient-v2-${OGINT_VER} && \
+  unzip OpsGenieClient-v2-${OGINT_VER}.zip && \
+  dpkg -i opsgenie-integration-OpsGenieClient-v2-${OGINT_VER}/jiraservicedesk/packages/opsgenie-jiraServiceDesk_${MARID_VER}_all.deb && \
   curl -o /var/lib/opsgenie/marid/jruby-complete-${JRUBY_VER}.jar https://s3.amazonaws.com/jruby.org/downloads/${JRUBY_VER}/jruby-complete-${JRUBY_VER}.jar
 
 # Setup opsgenie user
@@ -40,7 +42,7 @@ RUN wget -O /tini https://github.com/krallin/tini/releases/download/${TINI_VERSI
 COPY --chown=opsgenie:root remco /etc/remco
 
 USER opsgenie
-WORKDIR /home/opsgenie
+WORKDIR /var/opsgenie
 
 # Copy over startup scripts
 COPY --chown=opsgenie:opsgenie ./files/entrypoint.sh ./
