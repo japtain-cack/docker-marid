@@ -1,6 +1,7 @@
 FROM openjdk:11-jdk-stretch
 
 USER root
+WORKDIR /tmp/opsgenie
 
 ENV REMCO_VER 0.11.1
 ENV OGINT_VER 2019.18.07
