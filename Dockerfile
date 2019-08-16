@@ -54,7 +54,7 @@ EXPOSE 8080
 
 # java jdwp port
 EXPOSE 17777
-VOLUME ["/var/opsgenie/marid/scripts"]
+VOLUME ["/var/opsgenie/marid/static"]
 
 ENTRYPOINT ["/tini", "--", "./entrypoint.sh"]
 
