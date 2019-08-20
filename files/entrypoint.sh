@@ -2,6 +2,7 @@
 
 export MARID_HOME=/var/opsgenie/marid
 export MARID_CONF=/etc/opsgenie/marid
+export OPSGENIE_CONF=/etc/opsgenie/conf
 export MARID_LIB=/var/lib/opsgenie/marid
 export REMCO_HOME=/etc/remco
 export REMCO_RESOURCE_DIR=${REMCO_HOME}/resources.d

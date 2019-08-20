@@ -1,0 +1,5 @@
+[[template]]
+  src = "${REMCO_TEMPLATE_DIR}/opsgenie-integration.conf"
+  dst = "${OPSGENIE_CONF}/opsgenie-integration.conf"
+  make_directories = true
+  mode = "0644"
