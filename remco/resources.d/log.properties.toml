@@ -1,5 +1,5 @@
 [[template]]
   src = "${REMCO_TEMPLATE_DIR}/log.properties"
-  dst = "${LOG_CONF_PATH}"
+  dst = "${MARID_CONF}/log.properties"
   make_directories = true
   mode = "0644"

@@ -1,5 +1,5 @@
 [[template]]
   src = "${REMCO_TEMPLATE_DIR}/marid.conf"
-  dst = "${CONF_PATH}"
+  dst = "${MARID_CONF}/marid.conf"
   make_directories = true
   mode = "0644"
