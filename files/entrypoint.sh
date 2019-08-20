@@ -18,7 +18,7 @@ fi
 
 remco
 
-cat <<EOF > ${SCRIPTS_DIR}/test.groovy
+cat <<EOF > ${MARID_HOME}/scripts/test.groovy
 import java.text.SimpleDateFormat
 def date = new Date()
 sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
