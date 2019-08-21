@@ -8,8 +8,11 @@ Run a marid server in a Docker container
 
 
 This Dockerfile will download the marid Server app and set it up, along with its dependencies.
+
 This version of marid contains the Jira Service Desk components and is intended to be used with that system.
+
 https://docs.opsgenie.com/docs/jiraservicedesk-integration
+
 https://github.com/opsgenie/opsgenie-integration/tree/master/jiraservicedesk
 
 Remco is used to manage static configuration files in the container. To customize your conf files, use the `-e <environment var>=<value>` flag in your docker run command. Conf files will be overwritten every time the container is launched.
