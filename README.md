@@ -18,6 +18,7 @@ Remco is used to manage static configuration files in the container. To customiz
 ## Example
 
 Use this `docker run` command to launch a container.
+
 **NOTE: You will need to review the possible environment variables to configure the marid server and include those in the docker run command (see below).**
 
  $ `docker run -d -it --name=marid -v /opt/marid:/var/opsgenie/marid/static -p 8080:8080/tcp -e MYVAR=myValue nsnow/docker-marid:latest`
